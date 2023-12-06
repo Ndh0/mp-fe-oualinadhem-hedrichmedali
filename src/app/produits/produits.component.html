@@ -1,0 +1,128 @@
+<h1 class="text-center mt-4 mb-4">Dashboard Statistiques</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-4 col-lg-4">
+      <div class="card l-bg-cherry">
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">Totals Factures</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0">
+                {{r.totfacts}} DT
+              </h2>
+            </div>
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4">
+      <div class="card l-bg-blue-dark">
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">Total payements</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0">
+                {{r.totpays}} DT
+              </h2>
+            </div>
+            
+          </div>
+         
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4">
+      <div class="card l-bg-green-dark">
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
+          <div class="mb-4">
+            <h5 class="card-title mb-0">dettes</h5>
+          </div>
+          <div class="row align-items-center mb-2 d-flex">
+            <div class="col-8">
+              <h2 class="d-flex align-items-center mb-0">
+                {{r.totDe}} DT
+              </h2>
+            </div>
+           
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="card-title text-center">CLIENTS</h1>
+    </div>
+    <div class="card-body">
+      <select [(ngModel)]="selectedFilter" (change)="applyFilter(selectedFilter)" [value]=''>
+        <option value="all">All</option>
+        <option value="payed">payed</option>
+        <option value="Pending">Pending</option>
+        <option value="not payed">not payed</option>
+      </select>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom & Prenom</th>
+            <th>Total Facture</th>
+            <th>Total Paiements</th>
+            <th>Dettes</th>
+            <th>DETTEUS</th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <!-- Assuming 'r.clts' is an array of clients -->
+          <tr *ngFor="let rep of filteredClts">
+            <td>{{rep.id}}</td>
+            <td>{{rep.np}}</td>
+            <td>{{rep.totFactClt}} DT</td>
+            <td>{{rep.totPayClt}} DT</td>
+            <td>{{rep.totD}} DT</td>
+            <td *ngIf="rep?.totD === 0">
+                <i class="bi bi-check" style="font-size: 26px;color: rgb(0, 128, 55);"></i>
+            </td>
+            <td *ngIf="rep?.totD === rep?.totFactClt">
+              <i class="bi bi-x-lg" style="font-size: 22px;color: rgb(248, 6, 6);"></i>
+          </td>
+          <td *ngIf="rep?.totD > 0 && rep?.totD< rep?.totFactClt">
+            <i class="bi bi-clock-history" style="font-size: 22px;color: rgb(248, 123, 6);"></i>
+        </td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<h1 class="text-center mt-4 mb-4">charts financieres</h1>
+<div style="float: left;width: 600px;height: 300px;border: 1px solid #000;border: 1px solid #000;margin: 30px; padding: 20px;">
+  <canvas
+        id="canvas"
+        >
+      {{chart}}</canvas>
+</div>
+
+<div style="float: left;height:350px;width: 400px;border: 1px solid #000;border: 1px solid #000;margin: 2px; padding: 5px;">
+  <canvas id="canvas1" width="250" height="200">
+    {{chart}}
+  </canvas>
+ </div>
+
+
+

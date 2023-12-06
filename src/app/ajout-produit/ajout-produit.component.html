@@ -1,0 +1,21 @@
+<div> 
+  <h1> Fiche Produit </h1>
+  
+  <form #produitForm="ngForm" (ngSubmit)="validerFormulaire(produitForm)">
+    <table>   
+     
+       <tr >
+          <td>  Désignation: </td>
+          <td>  <input type ="text"  name="designation"  [(ngModel)]="nouveauProduit.designation"/> </td>
+        </tr>
+        <tr >
+          <td>  Prix: </td>
+          <td>  <input type ="number"  name="prix"    [(ngModel)]="nouveauProduit.prix"/> </td>
+        </tr>
+        <tr >
+          <td [align]="'center'" colspan ="2">  
+          <input type ="submit"  value="Ajouter"  [disabled]="!produitForm.form.valid" /> 
+           <button  (click)="produitForm.reset()" >Effacer</button></td>
+        </tr>        
+   </table> 
+   </form>
